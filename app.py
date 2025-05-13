@@ -62,10 +62,10 @@ if uploaded_file is not None:
             pred_index = knn_classifier.predict(features)[0]
             confidence = knn_classifier.predict_proba(features)[0][pred_index]
 
-        if confidence >= 0.80:
-            raw_class = class_names[pred_index]
-            clean_class = raw_class.replace('_', ' ').replace('test', '').strip().title()
-            st.markdown(f"**Predicted Class:** {clean_class}")
-            st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
-        else:
-            st.warning("Prediction confidence is below 80%. Unable to determine the disease confidently.")
+            if confidence >= 0.80:
+                raw_class = class_names[pred_index]
+                clean_class = raw_class.replace('_', ' ').replace('test', '').strip().title()
+                st.markdown(f"**Predicted Class:** {clean_class}")
+                st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
+            else:
+                st.warning("Prediction confidence is below 80%. Unable to determine the disease confidently.")
